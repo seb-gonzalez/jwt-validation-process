@@ -21,7 +21,18 @@ public class JWTProcessor {
 
 	
 
-
+    public boolean isTokenFormatValid(String jwtToken) {
+    	
+    	String[] jwtTokenValues = jwtToken.split("\\.");
+    	int result = 0;
+    	
+    	for( int i=0; i < jwtTokenValues.length; i++) {
+    		result += (new String(base64Url.decode(jwtTokenValues[i].getBytes())).length() > 0 ? 1 : 0); 
+    	}
+    	
+    	
+    	return result==3;
+    }
 	
 	public boolean isValid(String jwtToken) {
 		
